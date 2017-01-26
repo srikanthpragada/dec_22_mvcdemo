@@ -1,4 +1,5 @@
-﻿using System;
+﻿using mvcdemo.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,8 @@ namespace mvcdemo.Controllers
         // GET: Hello    Hello/Index
         public ActionResult Index(string id = "Unknown")
         {
-            ViewBag.Message = "Hello, " + id;
-            return View();
+            Course c = new Course { Name = "AngularJS", Duration = 10, Fee = 2000 };
+            return View(c);
         }
 
         public ActionResult Wish(string name)

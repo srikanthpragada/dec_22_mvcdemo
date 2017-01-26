@@ -1,0 +1,51 @@
+﻿@model IEnumerable<mvcdemo.Models.Course>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Courses</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table" border="1">
+        <tr>
+            <th>
+                Course Name
+            </th>
+            <th>
+                Duration
+            </th>
+            <th>
+               Course Fee (INR)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var course in Model) {
+        <tr>
+            <td>
+                @Html.Raw(course.Name)
+            </td>
+            <td>
+                @course.Duration
+            </td>
+            <td>
+                @course.Fee.ToString("c")
+            </td>
+            <td>
+                @Html.ActionLink("Details", "Details", new { id = course.Name}) |
+            </td>
+        </tr>
+    }
+    
+    </table>
+</body>
+</html>

@@ -1,4 +1,5 @@
-﻿
+﻿@model mvcdemo.Models.Course 
+
 @{
     Layout = null;
 }
@@ -11,6 +12,10 @@
     <title>Index</title>
 </head>
 <body>
-    <h1> @ViewBag.Message </h1>
+    <h1>Course Details</h1>
+    <h2>@Model.Name</h2>
+    <h2>@Model.Duration</h2>
+    <h2>@Model.Fee</h2>
+
 </body>
 </html>
