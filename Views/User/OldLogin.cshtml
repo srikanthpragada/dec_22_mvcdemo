@@ -1,0 +1,33 @@
+﻿@model mvcdemo.Models.User
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <h2>Login</h2>
+        @Html.LabelFor(model => model.Email)
+        <br />
+        @Html.TextBoxFor(model => model.Email)
+        <p />
+        @Html.LabelFor(model => model.Password)
+        <p />
+        @Html.PasswordFor(model => model.Password)
+        <p/>
+        <input type = "submit" value = "Login" />
+        <p/>
+        <div> @ViewBag.Message</div>
+    }
+
+
+</body>
+</html>
