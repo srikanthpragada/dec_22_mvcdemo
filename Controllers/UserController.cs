@@ -19,13 +19,14 @@ namespace mvcdemo.Controllers
         [HttpPost]
         public ActionResult Login(User user)
         {
-            if (user.Email == "admin@abc.com" && user.Password == "123")
-                return RedirectToAction("Home");
-            else
-            {
-                ViewBag.Message = "Invalid Login. Try Again!";
-                return View(user);
-            }
+
+                if (user.Email == "admin@abc.com" && user.Password == "123")
+                    return RedirectToAction("Home");
+                else
+                {
+                    ViewBag.Message = "Invalid Login. Try Again!";
+                    return View(user);
+                }
         }
     }
 }

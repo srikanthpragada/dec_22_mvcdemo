@@ -9,7 +9,7 @@ namespace mvcdemo.Controllers
 {
     public class CourseController : Controller
     {
-        // GET: Course
+
         public ActionResult List()
         {
             List<Course> courses = new List<Course>

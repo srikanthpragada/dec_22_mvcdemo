@@ -1,0 +1,63 @@
+﻿@model IEnumerable<mvcdemo.Models.DbCourse>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <p>
+        @Html.ActionLink("Add Course", "Add")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
+            <th></th>
+        </tr>
+    
+    @foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Code)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Duration)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fee)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit",
+                   new { id=item.Code }) |
+                @Html.ActionLink("Delete", "Delete", new { id= item.Code },
+                   new { onclick = "return confirm('Do you really want to delete course?')" } )
+            </td>
+        </tr>
+    }
+    
+    </table>
+
+    <p/>
+    <h4>@TempData["Message"]</h4>
+</body>
+</html>

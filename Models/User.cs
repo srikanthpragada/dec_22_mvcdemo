@@ -15,5 +15,8 @@ namespace mvcdemo.Models
         [Required]
         [StringLength(10,MinimumLength = 4, ErrorMessage = "Password Must Be 4 to 10 Chars")]
         public String Password { get; set; }
+
+        [RegularExpression("^[0-9]{10}$", ErrorMessage ="Invalid Mobile Number. It must be 10 digits")]
+        public String Mobile { get; set; }
     }
 }
