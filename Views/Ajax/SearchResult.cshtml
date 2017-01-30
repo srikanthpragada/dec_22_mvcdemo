@@ -1,0 +1,50 @@
+﻿@model IEnumerable<mvcdemo.Models.DbCourse>
+
+@if (Model.Count() > 0)
+{
+    <table border="1" style="width:100%">
+        <tr style="background-color:navy;color:white">
+            <th>
+                @Html.DisplayNameFor(model => model.Code)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Duration)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fee)
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Code)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Duration)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    if (ViewBag.Message != null)
+    {
+        <h3>Error : @ViewBag.Message </h3>
+    }
+    else
+    {
+        <h3> Sorry! No Course Found!</h3>
+    }
+}

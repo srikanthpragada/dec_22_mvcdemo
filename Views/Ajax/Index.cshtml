@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+     @Ajax.ActionLink("What is Today?","Today", 
+                       new AjaxOptions { UpdateTargetId = "today"})
+     <h1 id="today"></h1>
+
+     @Scripts.Render("~/bundles/jquery")
+     <script src="~/Scripts/jquery.unobtrusive-ajax.js"></script>
+</body>
+</html>
