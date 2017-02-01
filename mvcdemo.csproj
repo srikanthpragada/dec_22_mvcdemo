@@ -51,6 +51,7 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -125,6 +126,7 @@
     <Compile Include="Controllers\DbCourseController.cs" />
     <Compile Include="Controllers\HelloController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LinqController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -132,6 +134,8 @@
     <Compile Include="Models\DbCourse.cs" />
     <Compile Include="Models\Course.cs" />
     <Compile Include="Models\Database.cs" />
+    <Compile Include="Models\LinqCourse.cs" />
+    <Compile Include="Models\MyDataContext.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -184,6 +188,8 @@
     <Content Include="Views\Ajax\Index.cshtml" />
     <Content Include="Views\Ajax\Search.cshtml" />
     <Content Include="Views\Ajax\SearchResult.cshtml" />
+    <Content Include="Views\Linq\Add.cshtml" />
+    <Content Include="Views\Linq\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
