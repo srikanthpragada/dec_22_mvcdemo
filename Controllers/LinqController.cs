@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace mvcdemo.Controllers
 {
+    // [Authorize]
     public class LinqController : Controller
     {
         // GET: Linq
@@ -15,8 +16,6 @@ namespace mvcdemo.Controllers
             MyDataContext dc = new MyDataContext();
             return View(dc.Courses);
         }
-
-
         [HttpGet]
         public ActionResult Add()
         {
@@ -59,6 +58,61 @@ namespace mvcdemo.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        public ActionResult Edit(String id)
+        {
+            MyDataContext dc = new MyDataContext();
+            var course = (from c in dc.Courses
+                          where c.Code == id
+                          select c).SingleOrDefault();
+
+            if (course == null)
+            {
+                return Content("Sorry! Course Code Not Found!");
+            }
+            else
+            {
+                return View(course);
+            }
+        }
+
+        [HttpPost]
+        public ActionResult Edit(LinqCourse course)
+        {
+            MyDataContext dc = new MyDataContext();
+            var dbcourse = (from c in dc.Courses
+                          where c.Code == course.Code
+                          select c).SingleOrDefault();
+
+            if (dbcourse == null)
+            {
+                return Content("Sorry! Course Not Found!");
+            }
+            else
+            {
+                dbcourse.Title = course.Title;
+                dbcourse.Duration = course.Duration;
+                dbcourse.Fee = course.Fee;
+                dc.SubmitChanges();  // update 
+                TempData["message"] = "";
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        public string ValidateCode(String id)
+        {
+            MyDataContext dc = new MyDataContext();
+            var course = (from c in dc.Courses
+                          where c.Code == id
+                          select c).SingleOrDefault();
+
+            if (course == null)
+                return "";
+            else
+                return "Code is existing!";
         }
 
     }
