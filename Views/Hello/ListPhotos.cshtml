@@ -1,0 +1,21 @@
+﻿@model IEnumerable<String>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListPhotos</title>
+</head>
+<body>
+    <h2>List Of Photos</h2>
+        @foreach (String filename in Model)
+        {
+           <img src="~/photos/@filename" style="width:300px;height:300px" />
+           <h5>@filename</h5>
+        }
+</body>
+</html>

@@ -1,0 +1,24 @@
+﻿@model IEnumerable<SelectListItem>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Select Course</title>
+</head>
+<body>
+    @using (Html.BeginForm())
+    {
+        <span>Select Course : </span>  @Html.DropDownList("course", Model)
+        <p />
+        <input type="submit" value="Submit" />
+
+    }
+
+    <h3>@ViewBag.Message</h3>
+</body>
+</html>

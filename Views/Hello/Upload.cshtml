@@ -1,0 +1,25 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Upload Photo</title>
+</head>
+<body>
+    <h4>Upload Photo</h4>
+    @using (Html.BeginForm("Upload","Hello",
+                    FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+            <input type="file" name="photo" />
+            <p />
+            <input type="submit" value="Submit"/>
+    }
+    <p />
+    @ViewBag.Message
+</body>
+</html>

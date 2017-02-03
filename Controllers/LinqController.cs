@@ -115,5 +115,19 @@ namespace mvcdemo.Controllers
                 return "Code is existing!";
         }
 
+        public ActionResult SelectCourse(String course)
+        {
+            MyDataContext dc = new MyDataContext();
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach(LinqCourse c in  dc.Courses)
+            {
+                items.Add(new SelectListItem { Text = c.Title, Value = c.Code });
+
+            }
+            ViewBag.Message = "You Selected Course : " + course;
+            return View(items);
+        }
+
+      
     }
 }
