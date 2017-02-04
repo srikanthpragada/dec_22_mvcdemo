@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace mvcdemo.Controllers
@@ -115,7 +114,8 @@ namespace mvcdemo.Controllers
                 return "Code is existing!";
         }
 
-        public ActionResult SelectCourse(String course)
+        [HttpGet]
+        public ActionResult SelectCourse()
         {
             MyDataContext dc = new MyDataContext();
             List<SelectListItem> items = new List<SelectListItem>();
@@ -124,10 +124,23 @@ namespace mvcdemo.Controllers
                 items.Add(new SelectListItem { Text = c.Title, Value = c.Code });
 
             }
+            return View(items);
+        }
+
+        [HttpPost]
+        public ActionResult SelectCourse(String course)
+        {
+            MyDataContext dc = new MyDataContext();
+            List<SelectListItem> items = new List<SelectListItem>();
+            foreach (LinqCourse c in dc.Courses)
+            {
+                items.Add(new SelectListItem { Text = c.Title, Value = c.Code });
+
+            }
             ViewBag.Message = "You Selected Course : " + course;
             return View(items);
         }
 
-      
+
     }
 }
