@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Courses Client</title>
+	<meta charset="utf-8" />
+    <script src="Scripts/jquery-1.10.2.js"></script>
+    <script src="Scripts/bootstrap.js"></script>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+
+    <script>
+
+        $(document).ready(getCourses);
+
+        function getCourses()
+        {
+            console.log("Getting courses details");
+            $.getJSON("api/Courses", {}, showCourses);
+        }
+
+        function showCourses(courses) 
+        {
+            // clear existing rows 
+            $("#courseRows").text("");
+
+            $.each(courses,
+                 function (idx, course) {
+                     $("#courseRows").append(
+                         "<tr><td>" + course.Code + "</td><td>" + course.Title + "</td><td>" +
+                         course.Duration + "</td><td>" +
+                         course.Fee + "</td><td>" + 
+                         "<button onclick=\"deleteCourse('" + course.Code + "')\">Delete </button></td></tr>"
+                         );
+                 }
+            );
+        }
+
+        function addCourse()
+        {
+                var url = "api/Courses";
+                var course = {
+                    "Code": $("#code").val(),
+                    "Title": $("#title").val(),
+                    "Duration": $("#duration").val(),
+                    "Fee": $("#fee").val()
+                };
+
+                $.ajax(
+                { 
+                    "url": url, 
+                    "data": course,
+                    "type": "post", 
+                    "success": function () {
+                        alert("Course has been added!");
+                        getCourses();
+                    },
+                    "error": function () { alert("Sorry! Could not add course!"); }
+                });
+        }
+
+
+        function deleteCourse(code) {
+            var url = "api/Courses/" + code;
+            $.ajax(
+            {
+                "url": url,
+                "type": "DELETE",
+                "success":
+                     function () {
+                         alert("Course has been deleted!");
+                         getCourses();
+                     },
+                "error": function () { alert("Sorry! Could not delete course!"); }
+            });
+        }
+
+      
+    </script>
+</head>
+<body>
+    <h1> Courses </h1>
+    <input type="text" id="code" placeholder="Course Code" title="Course Code" />
+    <input type="text" id="title" placeholder="Course Title" title="Course Title"/>
+    <input type="number" id="duration" placeholder="Duration" title="Course Duration in Hours" />
+    <input type="number" id="fee" placeholder="Fee" title="Course Fee in INR"/>
+    <button onclick="addCourse()">Add Course</button>
+    <p></p>
+    <table class="table" id="coursesTable">
+        <thead>
+            <tr class="btn-primary">
+                <th>Code</th>
+                <th>Name</th>
+                <th>Duration</th>
+                <th>Fee</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody id="courseRows">
+
+        </tbody>
+    </table>
+
+
+</body>
+</html>
