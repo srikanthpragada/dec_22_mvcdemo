@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Web;
 using System.Web.Http;
 
 namespace mvcdemo.Controllers
@@ -18,7 +19,7 @@ namespace mvcdemo.Controllers
         }
 
         [HttpGet]
-        public IHttpActionResult GetCourse(String id )
+        public IHttpActionResult GetCourse(String id)
         {
             MyDataContext dc = new MyDataContext();
             var course = dc.Courses.Where(c => c.Code == id).SingleOrDefault();
@@ -31,12 +32,13 @@ namespace mvcdemo.Controllers
         [HttpPost]
         public void AddCourse(LinqCourse course)
         {
-            try {
+            try
+            {
                 MyDataContext dc = new MyDataContext();
                 dc.Courses.InsertOnSubmit(course);
                 dc.SubmitChanges();
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 HttpResponseMessage msg = new HttpResponseMessage();
                 msg.StatusCode = HttpStatusCode.InternalServerError;
@@ -55,6 +57,31 @@ namespace mvcdemo.Controllers
                 dc.Courses.DeleteOnSubmit(course);
                 dc.SubmitChanges();
                 return Ok();
+            }
+            else
+                return NotFound();
+        }
+
+        [HttpPut]
+        public IHttpActionResult UpdateCourse(String id, LinqCourse course)
+        {
+            MyDataContext dc = new MyDataContext();
+            var dbcourse = dc.Courses.Where(c => c.Code == id).SingleOrDefault();
+            if (dbcourse != null)
+            {
+                try
+                {
+                    dbcourse.Title = course.Title;
+                    dbcourse.Duration = course.Duration;
+                    dbcourse.Fee = course.Fee;
+                    dc.SubmitChanges();
+                    return Ok();
+                }
+                catch (Exception ex)
+                {
+                    HttpContext.Current.Trace.Write("Error : " + ex.Message);
+                    return this.BadRequest();
+                }
             }
             else
                 return NotFound();

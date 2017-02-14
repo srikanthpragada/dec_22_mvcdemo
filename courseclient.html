@@ -58,7 +58,44 @@
         }
 
 
+        function updateCourse() {
+            var url = "api/Courses/" + $("#code").val();
+            var course = {
+                "Code": $("#code").val(),
+                "Title": $("#title").val(),
+                "Duration": $("#duration").val(),
+                "Fee": $("#fee").val()
+            };
+
+            $.ajax(
+            {
+                "url": url,
+                "data": course,
+                "type": "PUT",
+                "success": function () {
+                    alert("Course has been updated successfully!");
+                    getCourses();
+                },
+                "error":
+                     function (jqXhr) {
+                         if (jqXhr.status == 400)
+                             alert("Sorry! Could not update course due to some error in data!");
+                         else
+                             alert("Sorry! Could not find course code!");
+                     }
+            });
+        }
+
+
+
+
         function deleteCourse(code) {
+            // take confirmation 
+            var resp = confirm("Do you really want to delete selected course [" + code + "]?");
+            if (!resp)
+                return;
+
+            // Delete course
             var url = "api/Courses/" + code;
             $.ajax(
             {
@@ -73,6 +110,8 @@
             });
         }
 
+
+
       
     </script>
 </head>
@@ -83,6 +122,7 @@
     <input type="number" id="duration" placeholder="Duration" title="Course Duration in Hours" />
     <input type="number" id="fee" placeholder="Fee" title="Course Fee in INR"/>
     <button onclick="addCourse()">Add Course</button>
+    <button onclick="updateCourse()">Update Course</button>
     <p></p>
     <table class="table" id="coursesTable">
         <thead>
